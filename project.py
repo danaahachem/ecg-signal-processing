@@ -1,10 +1,3 @@
-# Title: ECG Signals Processing 
-# Name: Dana Hachem
-# GitHub Username: danaahachem
-# City: Beirut
-# Country: Lebanon
-# Date: June 23, 2025
-
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
@@ -52,8 +45,11 @@ def main():
         plot_ECG_w_peaks(filtered_signal, "Filtered ECG Signal", r_peaks)
 
         # Step 5: Compute heart rate (BPM) from R-peaks
-        bpm = compute_heart_rate(r_peaks, fs)
-        print(f"Estimated Heart Rate: {bpm:.2f} BPM")
+        if len(r_peaks) > 1:
+            bpm = compute_heart_rate(r_peaks, fs)
+            print(f"Estimated Heart Rate: {bpm:.2f} BPM")
+        else:
+            print("Not enough peaks detected to compute heart rate.")
 
     except FileNotFoundError:
         sys.exit("Error: File not found!")
